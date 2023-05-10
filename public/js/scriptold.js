@@ -1,6 +1,6 @@
 var lfm_route = location.origin + location.pathname;
 var show_list;
-var sort_type = 'time';
+var sort_type = 'alphabetic';
 var multi_selection_enabled = false;
 var selected = [];
 var items = [];
@@ -140,18 +140,6 @@ $(document).on('click', '#upload', function () {
 });
 
 $(document).on('click', '[data-display]', function() {
-  show_list = $(this).data('display');
-  loadItems();
-});
-
-$(document).on('click', '#keyword-button', function() {
-    console.log('asdadas:'+$('#keyword').val());
-  show_list = $(this).data('display');
-  loadItems();
-});
-
-$(document).on('click', '#keyword-reset-button', function() {
-  $('#keyword').val("");
   show_list = $(this).data('display');
   loadItems();
 });
@@ -744,7 +732,7 @@ function use(items) {
   } else if (callback && window[callback]) {
     window[callback](getSelectedItems());
   } else if (callback && parent[callback]) {
-    parent[callback](getSelecteditems());
+    parent[callback](getSelectedItems());
   } else if (window.opener) { // standalone button or other situations
     window.opener.SetUrl(getSelectedItems());
   } else {
@@ -798,8 +786,7 @@ function usingWysiwygEditor() {
 function defaultParameters() {
   return {
     working_dir: $('#working_dir').val(),
-    type: $('#type').val(),
-    keyword: $('#keyword').val(),
+    type: $('#type').val()
   };
 }
 
